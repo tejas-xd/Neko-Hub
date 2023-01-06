@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData.dark(
         ),
         debugShowCheckedModeBanner: false,
-        home: Main(),
+        home: const Main(),
       ),
     );
   }

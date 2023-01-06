@@ -47,6 +47,11 @@ class _StartScreenState extends State<StartScreen> {
 
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: "My list",
+
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.download_for_offline_sharp),
             label: "Download",
 
@@ -56,11 +61,7 @@ class _StartScreenState extends State<StartScreen> {
             label: "Profile",
 
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: "home",
 
-          ),
         ],
       ),
       body: PageView(
@@ -70,7 +71,7 @@ class _StartScreenState extends State<StartScreen> {
             currentIndex = page;
           });
         },
-        children: <Widget>[
+        children: <Widget> [
           HomeScreen(),
           CalenderScreen(),
           ListScreen(),

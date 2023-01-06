@@ -8,7 +8,6 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
@@ -17,19 +16,42 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(
-              "assets/animelogo.gif",
-              height: 300.0,
-              width: 300.0,
+            Container(
+              width: 300,
+              height: 300,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(150.0)),
+                child: Image.asset('assets/logo.gif', fit: BoxFit.cover),
+              ),
             ),
+            const SizedBox(
+              height: 30,
+            ),
+            TextButton(
+              onPressed: () {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.googleLogin();
+              },
+              child: Container(
+                height: 50,
+                width: 160,
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(10.0),
 
-            ElevatedButton(
-                onPressed: (){
-                  final provider =
-                  Provider.of<GoogleSignInProvider>(context, listen: false);
-                  provider.googleLogin();
-                },
-                child: Text("Google sign in"))
+                ),
+                child: const Center(
+                  child: Text(
+                    'Google sign-in',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
