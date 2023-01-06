@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weeb_hub/screens/screens.dart';
 
@@ -21,9 +22,10 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Colors.grey[500],
+        selectedItemColor: CupertinoColors.activeGreen,
+        unselectedItemColor: Colors.grey,
         currentIndex: currentIndex,
         onTap: (value) {
           currentIndex = value;
@@ -32,7 +34,6 @@ class _StartScreenState extends State<StartScreen> {
             duration: const Duration(milliseconds: 200),
             curve: Curves.linear,
           );
-
           setState(() {});
         },
         items: const [
@@ -52,12 +53,12 @@ class _StartScreenState extends State<StartScreen> {
 
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.download_for_offline_sharp),
+            icon: Icon(Icons.file_download_outlined),
             label: "Download",
 
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
+            icon: Icon(Icons.account_circle_outlined),
             label: "Profile",
 
           ),
