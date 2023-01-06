@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:provider/provider.dart';
+import 'package:weeb_hub/firebase/googlesignin.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -18,7 +19,12 @@ class ProfileScreen extends StatelessWidget {
                 backgroundImage: NetworkImage(user.photoURL!),
               ),
               Text(user.displayName!),
-              Text(user.email!)
+              Text(user.email!),
+              TextButton(onPressed: (){
+                final provider =
+                Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.logout();
+              }, child: const Text("logout"))
             ]),
       ),
     );
