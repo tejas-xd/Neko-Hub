@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'firebase/googlesignin.dart';
 import 'screens/screens.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
 
@@ -20,7 +22,12 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        theme: ThemeData.dark(),
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          textTheme: TextTheme(
+            //bodyText2: GoogleFonts.sofia(),
+          )
+    ),
         debugShowCheckedModeBanner: false,
         home: const Main(),
       ),

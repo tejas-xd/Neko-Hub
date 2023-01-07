@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weeb_hub/screens/shared/custom.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,14 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-          height: 60,
-          child: Row(
-          children: [
-            Image.asset("assets/logo.png",width:80,),
-          ],
-          ),
-        ),
+        Custombar(title: "Home"),
         const SizedBox(
           height: 5,
         ),

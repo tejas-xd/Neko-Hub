@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weeb_hub/screens/shared/custom.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -10,6 +11,24 @@ class ListScreen extends StatefulWidget {
 class _ListScreenState extends State<ListScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Custombar(title: "My list"),
+        const SizedBox(
+          height: 5,
+        ),
+        SizedBox(
+          height: 100,
+          width: 200,
+          child: ListView(
+
+          ),
+
+
+        ),
+
+      ],
+    );
   }
 }
