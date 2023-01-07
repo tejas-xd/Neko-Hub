@@ -10,6 +10,31 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          height: 60,
+          child: Row(
+          children: [
+            Image.asset("assets/logo.png",width:80,),
+          ],
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        SizedBox(
+          height: 100,
+          width: 200,
+          child: ListView(
+
+          ),
+
+
+        ),
+
+      ],
+    );
   }
 }

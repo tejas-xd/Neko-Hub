@@ -9,7 +9,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  final PageController _pageController = PageController(initialPage: 0,);
+  PageController _pageController = PageController(initialPage: 0,);
   int currentIndex = 0;
 
 
@@ -24,7 +24,7 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: CupertinoColors.activeGreen,
+        selectedItemColor: Colors.green   ,
         unselectedItemColor: Colors.grey,
         currentIndex: currentIndex,
         onTap: (value) {
@@ -65,20 +65,22 @@ class _StartScreenState extends State<StartScreen> {
 
         ],
       ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (page) {
-          setState(() {
-            currentIndex = page;
-          });
-        },
-        children: <Widget> [
-          HomeScreen(),
-          CalenderScreen(),
-          ListScreen(),
-          DownloadScreen(),
-          ProfileScreen(),
-        ],
+      body: SafeArea(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (page) {
+            setState(() {
+              currentIndex = page;
+            });
+          },
+          children: <Widget> [
+            HomeScreen(),
+            CalenderScreen(),
+            ListScreen(),
+            DownloadScreen(),
+            ProfileScreen(),
+          ],
+        ),
       ),
     );
   }
