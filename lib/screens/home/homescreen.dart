@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weeb_hub/api/api_requests.dart';
 import 'package:weeb_hub/screens/shared/custom.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,19 +16,18 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Custombar(title: "Home"),
-        const SizedBox(
-          height: 5,
-        ),
         SizedBox(
-          height: 100,
-          width: 200,
+          height: 685,
           child: ListView(
+            children: [
+              SectionText("TRENDING", "ANIME"),
+              CustomListAnime(APIService().getTrendingAnime()),
+              SectionText("Popular", "ANIME"),
+              CustomListAnime(APIService().getPopularAnime()),
 
+            ],
           ),
-
-
         ),
-
       ],
     );
   }
