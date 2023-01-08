@@ -20,9 +20,9 @@ class _CustombarState extends State<Custombar> {
         children: [
           Row(
             children: [
-              Image.asset("assets/logo.png",width:60,),
+              Image.asset("assets/logo.png",width:30,),
               SizedBox(width: 5,),
-              Text(widget.title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),)
+              Text(widget.title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold ),)
             ],
           ),
           Container(
@@ -121,7 +121,7 @@ class LandingCard extends StatelessWidget {
             width: size.width,
             height: size.height * 0.33,
             decoration: BoxDecoration(
-                image: DecorationImage(fit: BoxFit.cover, image: image)),
+                image: DecorationImage(fit: BoxFit.fitHeight, image: image)),
           ),
           Container(
             decoration: const BoxDecoration(
@@ -132,19 +132,7 @@ class LandingCard extends StatelessWidget {
                     Colors.transparent,
                     Color(0x99111015),
                     Color(0xFF111015),
-                  ]),
-            ),
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.center,
-                  end: Alignment.topCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.transparent,
-                    Color(0x99111015),
-                    Color(0xFF111015),
+                    Colors.black
                   ]),
             ),
           ),
@@ -193,4 +181,44 @@ Widget SectionText(String ktitle, String ntitle) {
           ),
         ],
       ));
+}
+
+
+class CustomCarouselSlider extends StatelessWidget {
+  CustomCarouselSlider(this.future, {super.key});
+  Future<List<Results>> future;
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: size.height * 0.33,
+      child: FutureBuilder(
+          future: future,
+          builder: ((context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return PageView.builder(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                pageSnapping: true,
+                itemCount: 20,
+                itemBuilder: ((context, index) {
+                  var url = snapshot.data![index].cover.toString();
+                  return LandingCard(
+                      NetworkImage("$url"),
+                      snapshot.data![index].title.english.toString());
+                }),
+              );
+            } else {
+              return PageView.builder(
+                  itemCount: 1,
+                  itemBuilder: ((context, index) {
+                    return LandingCard(
+                        const AssetImage("assets/loadingimg.jpg"), "Loading");
+                  }));
+            }
+          })),
+    );
+  }
 }

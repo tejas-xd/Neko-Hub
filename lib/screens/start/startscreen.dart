@@ -65,22 +65,20 @@ class _StartScreenState extends State<StartScreen> {
 
         ],
       ),
-      body: SafeArea(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (page) {
-            setState(() {
-              currentIndex = page;
-            });
-          },
-          children: <Widget> [
-            HomeScreen(),
-            CalenderScreen(),
-            ListScreen(),
-            DownloadScreen(),
-            ProfileScreen(),
-          ],
-        ),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (page) {
+          setState(() {
+            currentIndex = page;
+          });
+        },
+        children: <Widget> [
+          HomeScreen(),
+          CalenderScreen(),
+          ListScreen(),
+          DownloadScreen(),
+          ProfileScreen(),
+        ],
       ),
     );
   }

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'firebase/googlesignin.dart';
 import 'screens/screens.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 Future<void> main() async {
 
@@ -24,8 +24,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           brightness: Brightness.dark,
+          canvasColor: Colors.black,
           textTheme: TextTheme(
-            //bodyText2: GoogleFonts.sofia(),
+            bodyText2: GoogleFonts.poppins(),
           )
     ),
         debugShowCheckedModeBanner: false,

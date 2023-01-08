@@ -12,23 +12,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Custombar(title: "Home"),
-        SizedBox(
-          height: 685,
+    return SizedBox(
+          height: 740,
           child: ListView(
+            padding: EdgeInsets.zero,
             children: [
+              CustomCarouselSlider(APIService().getTrendingAnime()),
               SectionText("TRENDING", "ANIME"),
               CustomListAnime(APIService().getTrendingAnime()),
               SectionText("Popular", "ANIME"),
               CustomListAnime(APIService().getPopularAnime()),
-
             ],
           ),
-        ),
-      ],
     );
   }
 }
