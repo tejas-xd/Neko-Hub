@@ -1,7 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weeb_hub/screens/screens.dart';
-
 
 class StartScreen extends StatefulWidget {
   @override
@@ -9,9 +10,10 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  PageController _pageController = PageController(initialPage: 0,);
+  PageController _pageController = PageController(
+    initialPage: 0,
+  );
   int currentIndex = 0;
-
 
   @override
   void dispose() {
@@ -23,48 +25,56 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.green   ,
-        unselectedItemColor: Colors.grey,
-        currentIndex: currentIndex,
-        onTap: (value) {
-          currentIndex = value;
-          _pageController.animateToPage(
-            value,
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.linear,
-          );
-          setState(() {});
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month_outlined),
-            label: "Releases",
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
-            label: "My list",
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.file_download_outlined),
-            label: "Download",
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: "Profile",
-
-          ),
-
-        ],
-      ),
+      bottomNavigationBar: Align(
+          alignment: FractionalOffset.bottomCenter,
+          //this is very important, without it the whole screen will be blurred
+          child: ClipRect(
+              //I'm using BackdropFilter for the blurring effect
+              child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 10.0,
+                    sigmaY: 10.0,
+                  ),
+                  child: Opacity(
+                    //you can change the opacity to whatever suits you best
+                    opacity: 0.8,
+                    child: BottomNavigationBar(
+                      selectedItemColor: Colors.green,
+                      unselectedItemColor: Colors.grey,
+                      currentIndex: currentIndex,
+                      onTap: (value) {
+                        currentIndex = value;
+                        _pageController.animateToPage(
+                          value,
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.linear,
+                        );
+                        setState(() {});
+                      },
+                      items: const [
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.home),
+                          label: "Home",
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.calendar_month_outlined),
+                          label: "Releases",
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.list_alt),
+                          label: "My list",
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.file_download_outlined),
+                          label: "Download",
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.account_circle_outlined),
+                          label: "Profile",
+                        ),
+                      ],
+                    ),
+                  )))),
       body: PageView(
         controller: _pageController,
         onPageChanged: (page) {
@@ -72,7 +82,7 @@ class _StartScreenState extends State<StartScreen> {
             currentIndex = page;
           });
         },
-        children: <Widget> [
+        children: <Widget>[
           HomeScreen(),
           CalenderScreen(),
           ListScreen(),
@@ -83,5 +93,3 @@ class _StartScreenState extends State<StartScreen> {
     );
   }
 }
-
-
