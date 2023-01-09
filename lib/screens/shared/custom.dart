@@ -113,13 +113,13 @@ class LandingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.33,
+      height: size.height * 0.25,
       width: size.width,
       child: Stack(
         children: [
           Container(
             width: size.width,
-            height: size.height * 0.33,
+            height: size.height * 0.25,
             decoration: BoxDecoration(
                 image: DecorationImage(fit: BoxFit.fitHeight, image: image)),
           ),
@@ -137,7 +137,7 @@ class LandingCard extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: size.height * 0.28),
+            margin: EdgeInsets.only(top: size.height * 0.20),
             width: size.width,
             child: Text(
               name,
@@ -193,7 +193,7 @@ class CustomCarouselSlider extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: size.height * 0.33,
+      height: size.height * 0.25,
       child: FutureBuilder(
           future: future,
           builder: ((context, AsyncSnapshot snapshot) {
@@ -202,7 +202,7 @@ class CustomCarouselSlider extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
                 pageSnapping: true,
-                itemCount: 20,
+                itemCount: 10,
                 itemBuilder: ((context, index) {
                   var url = snapshot.data![index].cover.toString();
                   return LandingCard(
