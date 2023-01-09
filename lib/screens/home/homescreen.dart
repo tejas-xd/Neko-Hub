@@ -13,15 +13,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-          height: 740,
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
               CustomCarouselSlider(APIService().getTrendingAnime()),
               SectionText("TRENDING", "ANIME"),
               CustomListAnime(APIService().getTrendingAnime()),
-              SectionText("Popular", "ANIME"),
+              SectionText("POPULAR", "ANIME"),
               CustomListAnime(APIService().getPopularAnime()),
+              SectionText("RECENT", "ANIME"),
+              CustomListAnime(APIService().getRecentAnime()),
             ],
           ),
     );
