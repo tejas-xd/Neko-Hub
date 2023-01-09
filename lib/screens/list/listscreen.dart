@@ -14,7 +14,6 @@ class _ListScreenState extends State<ListScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Custombar(title: "My list"),
         const SizedBox(
           height: 5,
         ),

@@ -14,7 +14,6 @@ class _DownloadScreenState extends State<DownloadScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Custombar(title: "Downloads"),
         const SizedBox(
           height: 5,
         ),

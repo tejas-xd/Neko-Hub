@@ -1,40 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weeb_hub/api/model/model.dart';
 
-class Custombar extends StatefulWidget {
-  const Custombar({Key? key ,required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<Custombar> createState() => _CustombarState();
-}
-
-class _CustombarState extends State<Custombar> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Image.asset("assets/logo.png",width:30,),
-              SizedBox(width: 5,),
-              Text(widget.title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold ),)
-            ],
-          ),
-          Container(
-              child: Icon( Icons.search_outlined,color: Colors.green,size: 30,),
-              margin: EdgeInsets.only(right: 10),
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class CustomListAnime extends StatelessWidget {
   CustomListAnime(this.future, {super.key});
   Future<List<Results>> future;
@@ -182,7 +148,6 @@ Widget SectionText(String ktitle, String ntitle) {
         ],
       ));
 }
-
 
 class CustomCarouselSlider extends StatelessWidget {
   CustomCarouselSlider(this.future, {super.key});

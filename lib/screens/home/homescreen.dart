@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
               CustomListAnime(APIService().getPopularAnime()),
               SectionText("RECENT", "ANIME"),
               CustomListAnime(APIService().getRecentAnime()),
+              SizedBox(height: MediaQuery.of(context).size.height*0.1,)
             ],
           ),
     );

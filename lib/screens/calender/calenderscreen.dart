@@ -14,7 +14,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Custombar(title: "Release Calender"),
+        SizedBox(
+            height: MediaQuery.of(context).size.height*0.05,
+        ),
         const SizedBox(
           height: 5,
         ),

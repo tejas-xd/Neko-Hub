@@ -11,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Custombar(title: "Profile"),
+
         const SizedBox(
           height: 5,
         ),
