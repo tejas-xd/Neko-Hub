@@ -1,11 +1,11 @@
-class TrendingAnime {
+class Anime {
   int? currentPage;
   bool? hasNextPage;
   List<Results>? results;
 
-  TrendingAnime({this.currentPage, this.hasNextPage, this.results});
+  Anime({this.currentPage, this.hasNextPage, this.results});
 
-  TrendingAnime.fromJson(Map<String, dynamic> json) {
+  Anime.fromJson(Map<String, dynamic> json) {
     currentPage = json['currentPage'];
     hasNextPage = json['hasNextPage'];
     if (json['results'] != null) {

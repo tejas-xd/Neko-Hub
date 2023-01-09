@@ -30,9 +30,9 @@ class APIService {
           'Exception accoured: $error with stacktrace: $stacktrace');
     }
   }
-  Future<List<Results>> getTopRatedAnime() async {
+  Future<List<Results>> getRecentAnime() async {
     try {
-      final url = '$baseUrl/meta/anilist/advanced-search?sort=["SCORE_DESC"]';
+      final url = '$baseUrl/meta/anilist/recent-episodes';
       final response = await _dio.get(url);
       var anime = response.data['results'] as List;
       List<Results> animeList = anime.map((m) => Results.fromJson(m)).toList();
