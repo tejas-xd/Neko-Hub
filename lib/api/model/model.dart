@@ -32,7 +32,6 @@ class Results {
   int? malId;
   Title? title;
   String? image;
-  Trailer? trailer;
   String? description;
   String? status;
   String? cover;
@@ -48,7 +47,6 @@ class Results {
         this.malId,
         this.title,
         this.image,
-        this.trailer,
         this.description,
         this.status,
         this.cover,
@@ -64,8 +62,6 @@ class Results {
     malId = json['malId'];
     title = json['title'] != null ? new Title.fromJson(json['title']) : null;
     image = json['image'];
-    trailer =
-    json['trailer'] != null ? new Trailer.fromJson(json['trailer']) : null;
     description = json['description'];
     status = json['status'];
     cover = json['cover'];
@@ -85,9 +81,6 @@ class Results {
       data['title'] = this.title!.toJson();
     }
     data['image'] = this.image;
-    if (this.trailer != null) {
-      data['trailer'] = this.trailer!.toJson();
-    }
     data['description'] = this.description;
     data['status'] = this.status;
     data['cover'] = this.cover;
@@ -126,24 +119,3 @@ class Title {
   }
 }
 
-class Trailer {
-  String? id;
-  String? site;
-  String? thumbnail;
-
-  Trailer({this.id, this.site, this.thumbnail});
-
-  Trailer.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    site = json['site'];
-    thumbnail = json['thumbnail'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['site'] = this.site;
-    data['thumbnail'] = this.thumbnail;
-    return data;
-  }
-}
