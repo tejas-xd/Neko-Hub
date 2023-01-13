@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:weeb_hub/api/model/infomodel.dart';
-import 'model/model.dart';
+import 'package:weeb_hub/api/model/schedulemodel.dart';
+import 'package:weeb_hub/api/model/model.dart';
 
 class APIService {
   final Dio _dio = Dio();
@@ -49,9 +50,27 @@ class APIService {
     try {
       final url = '$baseUrl/meta/anilist/info/$info';
       final response = await _dio.get(url);
+      print(response);
       var anime = response.data;
       AnimeInfo animeinfo = AnimeInfo.fromJson(anime);
       return animeinfo;
+    } catch (error, stacktrace) {
+      throw Exception(
+          'Exception accoured: $error with stacktrace: $stacktrace');
+    }
+  }
+
+  Future<List<SResults>> getschedule(String year,String week) async {
+    try {
+      final response = await _dio.get('https://animeschedule.net/api/v3/timetables/sub?year=$year&week=$week',
+          options: Options(headers: {
+        'Authorization': 'Bearer d9YFgDlELHp7Mnzc7wsplMcUDTYruE',
+      }));
+      print(response);
+      var anime = response.data as List;
+      List<SResults> animeList = anime.map((m) => SResults.fromJson(m)).toList();
+      print(animeList[0].title);
+      return animeList;
     } catch (error, stacktrace) {
       throw Exception(
           'Exception accoured: $error with stacktrace: $stacktrace');
