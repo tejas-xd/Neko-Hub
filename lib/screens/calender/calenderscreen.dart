@@ -99,7 +99,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         var url = sorted![index].imageVersionRoute;
                         var time =
                             sorted![index].episodeDate!.substring(11, 19);
-                        return SearchCard(
+                        return ScheduleCard(
                             sorted![index].title.toString(),
                             url == null
                                 ? const AssetImage("assets/loadingimg.jpg")
@@ -192,8 +192,8 @@ Widget SScheduleTab(String day, String date) {
       ));
 }
 
-class SearchCard extends StatelessWidget {
-  SearchCard(this.title, this.image, this.time, this.episodeno, {super.key});
+class ScheduleCard extends StatelessWidget {
+  ScheduleCard(this.title, this.image, this.time, this.episodeno, {super.key});
   String title;
   ImageProvider image;
   String episodeno;
