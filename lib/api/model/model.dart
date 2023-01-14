@@ -29,54 +29,35 @@ class Anime {
 
 class Results {
   String? id;
-  int? malId;
   Title? title;
   String? image;
   String? description;
   String? status;
   String? cover;
-  int? rating;
-  int? releaseDate;
-  List<String>? genres;
-  int? totalEpisodes;
-  int? duration;
   String? type;
 
   Results(
       {this.id,
-        this.malId,
         this.title,
         this.image,
         this.description,
         this.status,
         this.cover,
-        this.rating,
-        this.releaseDate,
-        this.genres,
-        this.totalEpisodes,
-        this.duration,
         this.type});
 
   Results.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    malId = json['malId'];
     title = json['title'] != null ? new Title.fromJson(json['title']) : null;
     image = json['image'];
     description = json['description'];
     status = json['status'];
     cover = json['cover'];
-    rating = json['rating'];
-    releaseDate = json['releaseDate'];
-    genres = json['genres'].cast<String>();
-    totalEpisodes = json['totalEpisodes'];
-    duration = json['duration'];
     type = json['type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['malId'] = this.malId;
     if (this.title != null) {
       data['title'] = this.title!.toJson();
     }
@@ -84,11 +65,6 @@ class Results {
     data['description'] = this.description;
     data['status'] = this.status;
     data['cover'] = this.cover;
-    data['rating'] = this.rating;
-    data['releaseDate'] = this.releaseDate;
-    data['genres'] = this.genres;
-    data['totalEpisodes'] = this.totalEpisodes;
-    data['duration'] = this.duration;
     data['type'] = this.type;
     return data;
   }

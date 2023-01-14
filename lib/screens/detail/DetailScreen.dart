@@ -2,12 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
 import 'package:weeb_hub/api/api_requests.dart';
+import 'package:weeb_hub/api/model/infomodel.dart';
 
-class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+class DetailScreen extends StatefulWidget {
+  DetailScreen({Key? key, required this.id}) : super(key: key);
+
+  String id;
 
   @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  late Future<AnimeInfo> info;
+  @override
+  void initState() {
+    super.initState();
+    info = APIService().getinfo(widget.id);
+  }
+
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return MaterialApp(
       theme: ThemeData(
           brightness: Brightness.dark,
@@ -19,14 +34,13 @@ class DetailScreen extends StatelessWidget {
       home: Scaffold(
           extendBody: true,
           body: FutureBuilder(
-              future: APIService().getinfo("21"),
+              future: APIService().getinfo(widget.id),
               builder: ((context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
-                  var size = MediaQuery.of(context).size;
                   return ListView(
                     padding: EdgeInsets.zero,
                     children: [
-                      Container(
+                      SizedBox(
                         height: size.height * 0.45,
                         width: size.width,
                         child: Stack(
@@ -58,12 +72,15 @@ class DetailScreen extends StatelessWidget {
                             ),
                             Container(
                               margin: EdgeInsets.only(top: size.height * 0.05),
-                              padding: EdgeInsets.only(left: 5),
+                              padding: const EdgeInsets.only(left: 5),
                               width: size.width,
-                              alignment: Alignment(-1, -1),
-                              child: Icon(
+                              alignment: const Alignment(-1, -1),
+                              child: const Icon(
                                 Icons.arrow_back,
                                 color: Colors.green,
+                                shadows: [
+                                  Shadow(blurRadius: 3,color: Colors.black)
+                                ],
                                 size: 30,
                               ),
                             ),
@@ -119,6 +136,52 @@ class DetailScreen extends StatelessWidget {
                             size: 18,
                           )
                         ],
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            width: size.width*0.45,
+                            margin: EdgeInsets.only(top:10),
+                            padding: EdgeInsets.symmetric(vertical: 2,horizontal: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.green)
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.play_circle,color: Colors.white,size: 18,),
+                                Text("PLAY",style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    letterSpacing: 2),)
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                            ),
+                          ),
+                          Container(
+                            width: size.width*0.48,
+                            margin: EdgeInsets.only(top:10),
+                            padding: EdgeInsets.symmetric(vertical: 2,horizontal: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.green)
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.add_box_outlined,color: Colors.green,size: 18,),
+                                Text("ADD TO LIST",style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    letterSpacing: 2),)
+                              ],
+                            ),
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                       ),
                       SizedBox(
                         height: 10,
