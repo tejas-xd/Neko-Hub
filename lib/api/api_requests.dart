@@ -32,6 +32,7 @@ class APIService {
           'Exception accoured: $error with stacktrace: $stacktrace');
     }
   }
+
   Future<List<Results>> getRecentAnime() async {
     try {
       final url = '$baseUrl/meta/anilist/recent-episodes';
@@ -45,12 +46,10 @@ class APIService {
     }
   }
 
-
   Future<AnimeInfo> getinfo(String info) async {
     try {
       final url = '$baseUrl/meta/anilist/info/$info';
       final response = await _dio.get(url);
-      print(response);
       var anime = response.data;
       AnimeInfo animeinfo = AnimeInfo.fromJson(anime);
       return animeinfo;
@@ -66,10 +65,8 @@ class APIService {
           options: Options(headers: {
         'Authorization': 'Bearer d9YFgDlELHp7Mnzc7wsplMcUDTYruE',
       }));
-      print(response);
       var anime = response.data as List;
       List<SResults> animeList = anime.map((m) => SResults.fromJson(m)).toList();
-      print(animeList[0].title);
       return animeList;
     } catch (error, stacktrace) {
       throw Exception(
@@ -77,6 +74,18 @@ class APIService {
     }
   }
 
+  Future<List<Results>> getSearchAnime(String query) async {
+    try {
+      final url = '$baseUrl/meta/anilist/$query';
+      final response = await _dio.get(url);
+      var anime = response.data['results'] as List;
+      List<Results> animeList = anime.map((m) => Results.fromJson(m)).toList();
+      return animeList;
+    } catch (error, stacktrace) {
+      throw Exception(
+          'Exception accoured: $error with stacktrace: $stacktrace');
+    }
+  }
 
 
 }
