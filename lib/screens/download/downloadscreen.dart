@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weeb_hub/screens/shared/custom.dart';
 
 class DownloadScreen extends StatefulWidget {
   const DownloadScreen({Key? key}) : super(key: key);
@@ -11,23 +10,10 @@ class DownloadScreen extends StatefulWidget {
 class _DownloadScreenState extends State<DownloadScreen> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 5,
-        ),
-        SizedBox(
-          height: 100,
-          width: 200,
-          child: ListView(
-
-          ),
-
-
-        ),
-
-      ],
+    return const Center(
+      child: Image(
+        image: AssetImage("assets/progress.png"),
+      ),
     );
   }
 }
