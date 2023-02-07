@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:week_of_year/date_week_extensions.dart';
 import 'package:weeb_hub/api/api_requests.dart';
 import 'package:weeb_hub/api/model/schedulemodel.dart';
-import 'package:week_of_year/date_week_extensions.dart';
 
 class CalenderScreen extends StatefulWidget {
    CalenderScreen({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
           SizedBox(
             height: size.height * 0.05,
           ),
-          Container(
+          SizedBox(
             height: size.height * 0.1,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -67,7 +67,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
           ),
           Container(
             height: size.height * 0.85,
-            padding: EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 20),
             child: FutureBuilder(
               future: APIService()
                   .getschedule(currentYear.toString(), weekNumber.toString()),
@@ -88,35 +88,33 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       }
                     }
                   }
-                  return Container(
-                    child: ListView.builder(
-                      padding: EdgeInsets.only(bottom: 50),
-                      scrollDirection: Axis.vertical,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: sorted!.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        var url = sorted![index].imageVersionRoute;
-                        var time =
-                            sorted![index].episodeDate!.substring(11, 19);
-                        return ScheduleCard(
-                            sorted![index].title.toString(),
-                            url == null
-                                ? const AssetImage("assets/loadingimg.jpg")
-                                : NetworkImage(
-                                        "https://cdn.animeschedule.net/production/assets/public/img/$url")
-                                    as ImageProvider,
-                            time,
-                            sorted![index].episodeNumber.toString());
-                      },
-                    ),
+                  return ListView.builder(
+                    padding: EdgeInsets.only(bottom: 50),
+                    scrollDirection: Axis.vertical,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: sorted.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      var url = sorted[index].imageVersionRoute;
+                      var time =
+                          sorted[index].episodeDate!.substring(11, 19);
+                      return ScheduleCard(
+                          sorted[index].title.toString(),
+                          url == null
+                              ? const AssetImage("assets/loadingimg.jpg")
+                              : NetworkImage(
+                                      "https://cdn.animeschedule.net/production/assets/public/img/$url")
+                                  as ImageProvider,
+                          time,
+                          sorted[index].episodeNumber.toString());
+                    },
                   );
                 } else {
                   return Container();
                 }
               },
             ),
-          )
+          ),
         ],
       ),
     );
@@ -125,8 +123,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
 Widget ScheduleTab(String day, String date) {
   return Container(
-      margin: EdgeInsets.symmetric(horizontal: 6),
-      padding: EdgeInsets.all(4),
+      margin: const EdgeInsets.symmetric(horizontal: 6),
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.green),
           borderRadius: BorderRadius.circular(10)),
@@ -147,7 +145,7 @@ Widget ScheduleTab(String day, String date) {
           ),
           Text(
             date.toUpperCase(),
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,

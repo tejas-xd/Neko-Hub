@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:weeb_hub/api/api_requests.dart';
 import 'package:weeb_hub/api/model/model.dart';
-import 'package:weeb_hub/screens/shared/DetailScreen.dart';
-import 'package:weeb_hub/screens/shared/custom.dart';
+import 'package:weeb_hub/screens/detail/DetailScreen.dart';
+import 'package:weeb_hub/screens/custom.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {

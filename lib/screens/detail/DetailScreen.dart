@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
@@ -16,10 +18,65 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   late Future<AnimeInfo> info;
   @override
-  void initState() {
-    super.initState();
-    info = APIService().getinfo(widget.id);
-  }
+
+  void showBookmarkDialogbox(BuildContext context) => showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Select an option'),
+          content: SizedBox(
+            height: 150,
+            child: Column(
+              children: <Widget>[
+                InkWell(
+                  onTap: (){
+                    FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection('movies').doc(FirebaseAuth.instance.currentUser!.uid).update({
+                      'movies' : FieldValue.arrayUnion([{
+                        "moviename" :
+                            ''
+                      }])
+                    }).then((value) => {
+                      Navigator.pop(context)
+                    });
+                  },
+                  child: Text(
+                    "Watched".toUpperCase(),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 5),
+                  ),
+                ),
+                Text(
+                  "watching".toUpperCase(),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 5),
+                ),
+                Text(
+                  "on-hold".toUpperCase(),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 5),
+                ),
+                Text(
+                  "plan to watch".toUpperCase(),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 5),
+                ),
+              ],
+            ),
+          ),
+        );
+      });
 
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -77,7 +134,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               alignment: const Alignment(-1, -1),
                               child: const Icon(
                                 Icons.arrow_back,
-                                color: Colors.green,
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(blurRadius: 3,color: Colors.black)
                                 ],
@@ -89,115 +146,83 @@ class _DetailScreenState extends State<DetailScreen> {
                               width: size.width * 0.90,
                               child: Text(
                                 " " + snapshot.data.title.romaji,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w400,
                                     letterSpacing: 2),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                            width: 10,
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Icon(
+                                Icons.star,
+                                size: 16,
+                                color: Colors.green,
+                              ),
+                              Text(
+                                " ${snapshot.data.rating} ",
+                                style: const TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const Icon(
+                                Icons.navigate_next,
+                                size: 16,
+                                color: Colors.green,
+                              ),
+                              Text(
+                                " ${snapshot.data.releaseDate} ",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ),
-                          Icon(
-                            Icons.star,
-                            size: 16,
-                            color: Colors.green,
-                          ),
-                          Text(
-                            " " + snapshot.data.rating.toString() + " ",
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
+                          InkWell(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 15),
+                              child: const Icon(
+                                Icons.bookmark_add_outlined,
+                                size: 30,
+                              ),
                             ),
-                          ),
-                          Icon(
-                            Icons.navigate_next,
-                            size: 16,
-                            color: Colors.green,
-                          ),
-                          Text(
-                            " " + snapshot.data.releaseDate.toString() + " ",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Icon(
-                            Icons.bookmarks_outlined,
-                            size: 18,
+                            onTap: ()=> showBookmarkDialogbox(context),
                           )
                         ],
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            width: size.width*0.45,
-                            margin: EdgeInsets.only(top:10),
-                            padding: EdgeInsets.symmetric(vertical: 2,horizontal: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.green)
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.play_circle,color: Colors.white,size: 18,),
-                                Text("PLAY",style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    letterSpacing: 2),)
-                              ],
-                              mainAxisAlignment: MainAxisAlignment.center,
-
-                            ),
-                          ),
-                          Container(
-                            width: size.width*0.48,
-                            margin: EdgeInsets.only(top:10),
-                            padding: EdgeInsets.symmetric(vertical: 2,horizontal: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.green)
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.add_box_outlined,color: Colors.green,size: 18,),
-                                Text("ADD TO LIST",style: TextStyle(
-                                    color: Colors.green,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    letterSpacing: 2),)
-                              ],
-                            ),
-                          ),
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      ReadMoreText(
-                        snapshot.data.description,
-                        trimLines: 4,
-                        colorClickableText: Colors.lightBlue,
-                        trimMode: TrimMode.Line,
-                        trimCollapsedText: 'Read more',
-                        trimExpandedText: 'Show less',
+                      Container(
+                        padding: const EdgeInsets.only(left: 10 ),
+                        child: ReadMoreText(
+                          snapshot.data.description,
+                          trimLines: 4,
+                          colorClickableText: Colors.lightBlue,
+                          trimMode: TrimMode.Line,
+                          trimCollapsedText: 'Read more',
+                          trimExpandedText: 'Show less',
+                        ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         " Episodes",
                         style: TextStyle(
                             color: Colors.white,
@@ -217,7 +242,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 return Container(
                                   height: 100,
                                   width: 200,
-                                  margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                  margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
@@ -227,7 +252,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   ),
                                   child: Stack(
                                     children: [
-                                      Center(
+                                      const Center(
                                         child: Icon(
                                           Icons.play_circle_outlined,
                                           size: 50,
@@ -240,11 +265,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                         ),
                                       ),
                                       Align(
+                                        alignment: Alignment.bottomLeft,
                                         child: Text(
-                                          "  Episode-" +
-                                              snapshot
-                                                  .data.episodes[index].number
-                                                  .toString(),
+                                          "  Episode-${snapshot.data.episodes[index].number}",
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 15,
@@ -256,16 +279,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ]),
                                           textAlign: TextAlign.start,
                                         ),
-                                        alignment: Alignment.bottomLeft,
                                       )
                                     ],
                                   ),
                                 );
                               }))),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      Text(
+                      const Text(
                         " More Like This",
                         style: TextStyle(
                             color: Colors.green,
@@ -274,7 +296,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             letterSpacing: 1),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Container(
+                      SizedBox(
                         height: 200,
                         child: ListView.builder(
                           shrinkWrap: true,
@@ -289,7 +311,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 Container(
                                   height: 150,
                                   width: 100,
-                                  margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                  margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
@@ -298,12 +320,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 100,
                                   child: Text(
                                     snapshot.data.recommendations[index].title
                                         .romaji,
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.center,
@@ -323,3 +345,56 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 }
+
+
+
+
+
+
+
+// Row(
+// children: [
+// Container(
+// width: size.width*0.45,
+// margin: EdgeInsets.only(top:10),
+// padding: EdgeInsets.symmetric(vertical: 2,horizontal: 10),
+// decoration: BoxDecoration(
+// color: Colors.green,
+// borderRadius: BorderRadius.circular(20),
+// border: Border.all(color: Colors.green)
+// ),
+// child: Row(
+// children: [
+// Icon(Icons.play_circle,color: Colors.white,size: 18,),
+// Text("PLAY",style: TextStyle(
+// color: Colors.white,
+// fontSize: 18,
+// fontWeight: FontWeight.w400,
+// letterSpacing: 2),)
+// ],
+// mainAxisAlignment: MainAxisAlignment.center,
+//
+// ),
+// ),
+// Container(
+// width: size.width*0.48,
+// margin: EdgeInsets.only(top:10),
+// padding: EdgeInsets.symmetric(vertical: 2,horizontal: 10),
+// decoration: BoxDecoration(
+// borderRadius: BorderRadius.circular(20),
+// border: Border.all(color: Colors.green)
+// ),
+// child: Row(
+// children: [
+// Icon(Icons.add_box_outlined,color: Colors.green,size: 18,),
+// Text("ADD TO LIST",style: TextStyle(
+// color: Colors.green,
+// fontSize: 18,
+// fontWeight: FontWeight.w400,
+// letterSpacing: 2),)
+// ],
+// ),
+// ),
+// ],
+// mainAxisAlignment: MainAxisAlignment.spaceAround,
+// ),

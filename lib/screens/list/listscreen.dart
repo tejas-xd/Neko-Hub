@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weeb_hub/screens/shared/custom.dart';
+import 'package:weeb_hub/screens/custom.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({Key? key}) : super(key: key);

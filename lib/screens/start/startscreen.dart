@@ -1,6 +1,4 @@
 import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weeb_hub/screens/screens.dart';
 
@@ -10,9 +8,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  PageController _pageController = PageController(
-    initialPage: 0,
-  );
+  PageController _pageController = PageController(initialPage: 0);
   int currentIndex = 0;
 
   @override

@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 50,
                 width: 160,
                 decoration: BoxDecoration(
-                  color: Colors.black87,
+                  color: Colors.greenAccent,
                   borderRadius: BorderRadius.circular(10.0),
 
                 ),
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     'Google sign-in',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
                 ),

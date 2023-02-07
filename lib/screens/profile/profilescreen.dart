@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:weeb_hub/firebase/googlesignin.dart';
-import 'package:weeb_hub/screens/shared/custom.dart';
+import 'package:weeb_hub/screens/custom.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
 
         const SizedBox(
-          height: 5,
+          height: 50,
         ),
         Container(
           margin: EdgeInsets.only(left: 15, top: 5),
