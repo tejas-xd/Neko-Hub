@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weeb_hub/api/model/model.dart';
-import 'package:weeb_hub/screens/shared/DetailScreen.dart';
+import 'package:weeb_hub/screens/detail/DetailScreen.dart';
 
 class CustomListAnime extends StatelessWidget {
   CustomListAnime(this.future, {super.key});
