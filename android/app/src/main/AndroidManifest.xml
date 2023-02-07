@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.WeebHub.weeb_hub">
    <application
-        android:label="weeb_hub"
+        android:label="Neko"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
