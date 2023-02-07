@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           )
     ),
         debugShowCheckedModeBanner: false,
-        home: const Main(),
+        home:  const Main(),
       ),
     );
   }
@@ -59,7 +59,7 @@ class Main extends StatelessWidget {
           if (snapshot.hasData) {
             return StartScreen();
           } else {
-            return LoginScreen();
+            return const LoginScreen();
           }
         },
       ),
