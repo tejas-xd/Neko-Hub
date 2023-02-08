@@ -41,7 +41,6 @@ dependencies:
   firebase_auth: ^4.2.4
   provider: ^6.0.5
   google_sign_in: ^5.4.2
-  google_fonts: ^3.0.1
   dio: ^4.0.6
   flutter_svg: ^1.1.6
   readmore: ^2.2.0

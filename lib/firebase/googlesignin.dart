@@ -17,20 +17,34 @@ class GoogleSignInProvider extends ChangeNotifier {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    await FirebaseAuth.instance.signInWithCredential(credential).then((value) => {
-      FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).set({
-        'name' : FirebaseAuth.instance.currentUser!.displayName,
-        'Email' : FirebaseAuth.instance.currentUser!.email
-      }),
-      FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection('movies').doc(FirebaseAuth.instance.currentUser!.uid).set({
-        'movies' : FieldValue.arrayUnion([])
-      }),
-      FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection('series').doc(FirebaseAuth.instance.currentUser!.uid).set({
-        'series' : FieldValue.arrayUnion([])
-      }),
-      FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection('watched').doc(FirebaseAuth.instance.currentUser!.uid).set({
-        'watched' : FieldValue.arrayUnion([])
-      }),
+    await FirebaseAuth.instance.signInWithCredential(credential).then((value) async {
+
+      Future<bool> doesUserExist() async {
+        final snapshot = await FirebaseFirestore.instance.collection('Users')
+            .where("Email", isEqualTo: FirebaseAuth.instance.currentUser!.email!)
+            .get();
+        return snapshot.docs.isNotEmpty;
+      }
+      Future<void> startcollection () async
+      {
+        bool condition = await doesUserExist();
+        if (condition == false){
+          FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).set({
+            'name' : FirebaseAuth.instance.currentUser!.displayName,
+            'Email' : FirebaseAuth.instance.currentUser!.email
+          });
+          FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection('movies').doc(FirebaseAuth.instance.currentUser!.uid).set({
+            'movies' : FieldValue.arrayUnion([])
+          });
+          FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection('series').doc(FirebaseAuth.instance.currentUser!.uid).set({
+            'series' : FieldValue.arrayUnion([])
+          });
+          FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).collection('watched').doc(FirebaseAuth.instance.currentUser!.uid).set({
+            'watched' : FieldValue.arrayUnion([])
+          });
+        }
+      }
+      startcollection();
     });
     notifyListeners();
   }
