@@ -80,20 +80,15 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return MaterialApp(
-      theme: ThemeData(
-          brightness: Brightness.dark,
-          canvasColor: Colors.black,
-          textTheme: TextTheme(
-            bodyText2: GoogleFonts.poppins(),
-          )),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
           extendBody: true,
           body: FutureBuilder(
               future: APIService().getinfo(widget.id),
               builder: ((context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
+                  String html = snapshot.data.description;
+                  RegExp exp = RegExp(r"<[^>]*>",multiLine: true,caseSensitive: true);
+                  String parsedstring = html.replaceAll(exp, '');
                   return ListView(
                     padding: EdgeInsets.zero,
                     children: [
@@ -211,7 +206,11 @@ class _DetailScreenState extends State<DetailScreen> {
                       Container(
                         padding: const EdgeInsets.only(left: 10 ),
                         child: ReadMoreText(
-                          snapshot.data.description,
+                          parsedstring,
+                          style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400),
                           trimLines: 4,
                           colorClickableText: Colors.lightBlue,
                           trimMode: TrimMode.Line,
@@ -341,8 +340,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 } else {
                   return Container();
                 }
-              }))),
-    );
+              })));
   }
 }
 

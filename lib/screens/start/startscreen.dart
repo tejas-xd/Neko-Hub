@@ -8,7 +8,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   int currentIndex = 0;
 
   @override
@@ -23,19 +23,17 @@ class _StartScreenState extends State<StartScreen> {
       extendBody: true,
       bottomNavigationBar: Align(
           alignment: FractionalOffset.bottomCenter,
-          //this is very important, without it the whole screen will be blurred
           child: ClipRect(
-              //I'm using BackdropFilter for the blurring effect
+
               child: BackdropFilter(
                   filter: ImageFilter.blur(
                     sigmaX: 10.0,
                     sigmaY: 10.0,
                   ),
                   child: Opacity(
-                    //you can change the opacity to whatever suits you best
                     opacity: 0.8,
                     child: BottomNavigationBar(
-                      selectedItemColor: Colors.green,
+                      selectedItemColor: Colors.greenAccent,
                       unselectedItemColor: Colors.grey,
                       currentIndex: currentIndex,
                       onTap: (value) {
@@ -47,25 +45,25 @@ class _StartScreenState extends State<StartScreen> {
                         );
                         setState(() {});
                       },
-                      items: const [
+                      items:  [
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.home),
+                          icon: Icon((currentIndex == 0)?Icons.home:Icons.home_outlined),
                           label: "Home",
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.calendar_month_outlined),
+                          icon: Icon((currentIndex == 1)?Icons.calendar_month:Icons.calendar_month_outlined),
                           label: "Releases",
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.list_alt),
+                          icon: Icon((currentIndex == 2)?Icons.bookmark:Icons.bookmark_outline),
                           label: "My list",
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.file_download_outlined),
+                          icon: Icon((currentIndex == 3)?Icons.file_download:Icons.file_download_outlined),
                           label: "Download",
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.account_circle_outlined),
+                          icon: Icon((currentIndex == 4)?Icons.account_circle:Icons.account_circle_outlined),
                           label: "Profile",
                         ),
                       ],
@@ -79,10 +77,10 @@ class _StartScreenState extends State<StartScreen> {
           });
         },
         children: <Widget>[
-          HomeScreen(),
+          const HomeScreen(),
           CalenderScreen(),
-          ListScreen(),
-          DownloadScreen(),
+          const ListScreen(),
+          const DownloadScreen(),
           ProfileScreen(),
         ],
       ),

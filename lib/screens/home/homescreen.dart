@@ -121,7 +121,7 @@ class CustomListAnime extends StatelessWidget {
                       child: Container(
                         height: 150,
                         width: 100,
-                        margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                        margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.cover, image: NetworkImage('$url')),
@@ -133,7 +133,7 @@ class CustomListAnime extends StatelessWidget {
                       width: 100,
                       child: Text(
                         snapshot.data![index].title.romaji.toString(),
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
@@ -159,9 +159,9 @@ class CustomListAnime extends StatelessWidget {
                       child: Container(
                         height: 150,
                         width: 100,
-                        margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                        margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                         decoration: BoxDecoration(
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage("assets/loadingimg.jpg"),
                           ),
@@ -171,7 +171,7 @@ class CustomListAnime extends StatelessWidget {
                     ),
                     Container(
                       width: 100,
-                      child: Text(
+                      child: const Text(
                         "Loading",
                         style: TextStyle(color: Colors.white),
                         maxLines: 1,
@@ -211,8 +211,8 @@ Widget SectionText(String ktitle, String ntitle) {
           ),
           Text(
             ntitle.toUpperCase(),
-            style: TextStyle(
-                color: Colors.green,
+            style: const TextStyle(
+                color: Colors.tealAccent,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 5),
