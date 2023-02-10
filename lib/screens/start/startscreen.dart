@@ -21,54 +21,54 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: Align(
-          alignment: FractionalOffset.bottomCenter,
-          child: ClipRect(
-
-              child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 10.0,
-                    sigmaY: 10.0,
+      bottomNavigationBar:ClipRRect(
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+                sigmaX: 10.0,
+                sigmaY: 10.0,
+                tileMode: TileMode.mirror
+            ),
+            child: Opacity(
+              opacity: 0.8,
+              child: BottomNavigationBar(
+                selectedItemColor: Colors.green,
+                unselectedItemColor: Colors.grey,
+                currentIndex: currentIndex,
+                onTap: (value) {
+                  currentIndex = value;
+                  _pageController.animateToPage(
+                    value,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.linear,
+                  );
+                  setState(() {});
+                },
+                items:  [
+                  BottomNavigationBarItem(
+                    icon: Icon((currentIndex == 0)?Icons.home:Icons.home_outlined),
+                    label: "Home",
                   ),
-                  child: Opacity(
-                    opacity: 0.8,
-                    child: BottomNavigationBar(
-                      selectedItemColor: Colors.greenAccent,
-                      unselectedItemColor: Colors.grey,
-                      currentIndex: currentIndex,
-                      onTap: (value) {
-                        currentIndex = value;
-                        _pageController.animateToPage(
-                          value,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.linear,
-                        );
-                        setState(() {});
-                      },
-                      items:  [
-                        BottomNavigationBarItem(
-                          icon: Icon((currentIndex == 0)?Icons.home:Icons.home_outlined),
-                          label: "Home",
-                        ),
-                        BottomNavigationBarItem(
-                          icon: Icon((currentIndex == 1)?Icons.calendar_month:Icons.calendar_month_outlined),
-                          label: "Releases",
-                        ),
-                        BottomNavigationBarItem(
-                          icon: Icon((currentIndex == 2)?Icons.bookmark:Icons.bookmark_outline),
-                          label: "My list",
-                        ),
-                        BottomNavigationBarItem(
-                          icon: Icon((currentIndex == 3)?Icons.file_download:Icons.file_download_outlined),
-                          label: "Download",
-                        ),
-                        BottomNavigationBarItem(
-                          icon: Icon((currentIndex == 4)?Icons.account_circle:Icons.account_circle_outlined),
-                          label: "Profile",
-                        ),
-                      ],
-                    ),
-                  )))),
+                  BottomNavigationBarItem(
+                    icon: Icon((currentIndex == 1)?Icons.calendar_month:Icons.calendar_month_outlined),
+                    label: "Releases",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon((currentIndex == 2)?Icons.bookmark:Icons.bookmark_outline),
+                    label: "My list",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon((currentIndex == 3)?Icons.file_download:Icons.file_download_outlined),
+                    label: "Download",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon((currentIndex == 4)?Icons.account_circle:Icons.account_circle_outlined),
+                    label: "Profile",
+                  ),
+                ],
+              ),
+            ),
+          )),
       body: PageView(
         controller: _pageController,
         onPageChanged: (page) {
