@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "Neko-Hub",
+                    " Neko Hub",
                     style: TextStyle(
                         color: Colors.tealAccent,
                         fontSize: 20,
@@ -80,14 +80,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 32,
                           padding: const EdgeInsets.all(2),
                           decoration: BoxDecoration(
-                              color: Colors.black54,
-                              border: Border.all(color: Colors.white,width: 0.75),
+                              color: Colors.black,
+                              border: Border.all(color: Colors.tealAccent,width: 0.75),
                               borderRadius: BorderRadius.circular(18)
                           ),
                           child: const Icon(
                             Icons.search_outlined,
                             size: 28,
-                            color: Colors.white,
+                            color: Colors.tealAccent,
                           ),
                         ),
                       ),
@@ -102,8 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.all(2),
                           decoration: BoxDecoration(
                               image: const DecorationImage(image: NetworkImage('https://i.pinimg.com/236x/7f/c7/ac/7fc7ac4a0a065ab32e8554396111898d.jpg')),
-                              border: Border.all(color: Colors.white,width: 0.75),
-                              color: Colors.black54,
+                              border: Border.all(color: Colors.tealAccent,width: 0.75),
                               borderRadius: BorderRadius.circular(20)
 
                           ),
