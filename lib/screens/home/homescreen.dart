@@ -19,25 +19,23 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: EdgeInsets.zero,
         children: [
           Stack(children: [
-            Container(
+            SizedBox(
               height: size.height * 0.25,
               width: size.width,
               child: Stack(
                 children: [
                   Container(
-                    width: size.width,
-                    height: size.height * 0.25,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.cover,
                         image: NetworkImage(
-                          'https://pa1.narvii.com/5672/a9cec839170732f7e72e26b983e25325d9dfacb8_hq.gif',
+                          'https://64.media.tumblr.com/ef54d660ef19b41539113af32810aade/tumblr_ptr93kR27V1xkr0iao1_540.gif',
                         ),
                       ),
                     ),
                   ),
                   Container(
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                       gradient: LinearGradient(
                           begin: Alignment.center,
                           end: Alignment.bottomCenter,
@@ -45,8 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Colors.transparent,
                             Colors.transparent,
                             Colors.transparent,
-                            Color(0x99111015),
-                            Color(0xFF111015),
+                            Colors.black.withOpacity(0.25),
+                            Colors.black.withOpacity(0.5),
                             Colors.black
                           ]),
                     ),
@@ -54,21 +52,66 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SearchScreen()));
-              },
-              child: Container(
-                padding: const EdgeInsets.only(top: 40, right: 15),
-                alignment: Alignment.topRight,
-                child: const Icon(
-                  Icons.search_outlined,
-                  size: 30,
-                  color: Colors.black,
-                ),
+            Container(
+              padding: const EdgeInsets.only(top: 40, right: 15,left: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Neko-Hub",
+                    style: TextStyle(
+                        color: Colors.tealAccent,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SearchScreen()));
+                        },
+                        child: Container(
+                          height: 32,
+                          width: 32,
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              color: Colors.black54,
+                              border: Border.all(color: Colors.white,width: 0.75),
+                              borderRadius: BorderRadius.circular(18)
+                          ),
+                          child: const Icon(
+                            Icons.search_outlined,
+                            size: 28,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10,),
+                      GestureDetector(
+                        onTap: () {
+
+                        },
+                        child: Container(
+                          height: 32,
+                          width: 32,
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(image: NetworkImage('https://i.pinimg.com/236x/7f/c7/ac/7fc7ac4a0a065ab32e8554396111898d.jpg')),
+                              border: Border.all(color: Colors.white,width: 0.75),
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.circular(20)
+
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             )
           ]),
@@ -88,12 +131,12 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class CustomListAnime extends StatelessWidget {
-  CustomListAnime(this.future, {super.key});
-  Future<List<Results>> future;
+  const CustomListAnime(this.future, {super.key});
+  final Future<List<Results>> future;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: FutureBuilder(
         future: future,
@@ -124,12 +167,12 @@ class CustomListAnime extends StatelessWidget {
                         margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              fit: BoxFit.cover, image: NetworkImage('$url')),
+                              fit: BoxFit.cover, image: NetworkImage(url)),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: 100,
                       child: Text(
                         snapshot.data![index].title.romaji.toString(),
@@ -169,9 +212,9 @@ class CustomListAnime extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
+                    const SizedBox(
                       width: 100,
-                      child: const Text(
+                      child: Text(
                         "Loading",
                         style: TextStyle(color: Colors.white),
                         maxLines: 1,
@@ -212,7 +255,7 @@ Widget SectionText(String ktitle, String ntitle) {
           Text(
             ntitle.toUpperCase(),
             style: const TextStyle(
-                color: Colors.tealAccent,
+                color: Colors.greenAccent,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 5),
