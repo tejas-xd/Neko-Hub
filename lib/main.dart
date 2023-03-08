@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'firebase/googlesignin.dart';
 import 'screens/screens.dart';
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           canvasColor: Colors.black,
           textTheme: TextTheme(
+            bodyText1: GoogleFonts.poppins(),
+            bodyText2: GoogleFonts.poppins(),
           )
     ),
         debugShowCheckedModeBanner: false,
